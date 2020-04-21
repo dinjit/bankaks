@@ -1,0 +1,51 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bankaks.rechargeCoupon.RechargeCouponFragment">
+
+
+    <TextView
+        android:id="@+id/recharge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:text="Your Recharge Coupon"
+        app:layout_constraintBottom_toTopOf="@+id/recharge_coupon"
+        app:layout_constraintEnd_toEndOf="@+id/recharge_coupon"
+        app:layout_constraintStart_toStartOf="@+id/recharge_coupon" />
+
+    <TextView
+        android:id="@+id/recharge_coupon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        android:background="@drawable/dotted_borders"
+        android:maxEms="20"
+        android:padding="8dp"
+        android:text="@string/hello_blank_fragment"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/done"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Done"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="@+id/recharge_coupon"
+        app:layout_constraintStart_toStartOf="@+id/recharge_coupon"
+        app:layout_constraintTop_toBottomOf="@+id/recharge_coupon" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
