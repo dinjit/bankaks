@@ -32,7 +32,7 @@
         <action
             android:id="@+id/action_rechargeCouponFragment_to_userDetailFragment"
             app:destination="@id/userDetailFragment"
-            app:popUpTo="@id/rechargeCouponFragment"
+            app:popUpTo="@id/userDetailFragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>
