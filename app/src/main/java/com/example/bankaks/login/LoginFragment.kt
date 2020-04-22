@@ -8,11 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.example.bankaks.BaseFragment
 import com.example.bankaks.MainViewModel
 import com.example.bankaks.databinding.FragmentLoginBinding
 import com.example.bankaks.model.Creds
+import com.example.bankaks.util.KeyboardUtil
 import com.example.bankaks.util.showToast
 import com.example.bankaks.util.viewLifecycle
 import com.momentsnap.android.EventObserver
@@ -48,6 +48,10 @@ class LoginFragment : BaseFragment() {
 
         binding.login.setOnClickListener {
 
+            KeyboardUtil.hideSoftKeyboard(requireActivity())
+
+            binding.loader.visibility = View.VISIBLE
+
             viewModel.login(
                 Creds(
                     email = binding.email.text.toString(),
@@ -57,10 +61,12 @@ class LoginFragment : BaseFragment() {
         }
 
         viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
+            binding.loader.visibility = View.GONE
             navController.navigate(LoginFragmentDirections.actionLoginFragmentToUserDetailFragment())
         })
 
         viewModel.error.observe(viewLifecycleOwner, EventObserver {
+            binding.loader.visibility = View.GONE
             showToast(it)
         })
 

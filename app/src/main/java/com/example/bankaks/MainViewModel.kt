@@ -1,5 +1,6 @@
 package com.example.bankaks
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
@@ -14,6 +15,7 @@ class MainViewModel @Inject constructor(private val restApi: RestApi) : BaseView
 
     private val credentials = MutableLiveData<Creds>()
     private val recharge = MutableLiveData<Recharge>()
+    private val _coupon = MutableLiveData<String>()
 
     var loginResponse = credentials.switchMap { creds ->
         liveData(Dispatchers.IO) {
@@ -32,13 +34,17 @@ class MainViewModel @Inject constructor(private val restApi: RestApi) : BaseView
         liveData(Dispatchers.IO) {
             try {
                 val response = restApi.recharge(recharge)
-                emit(response)
+                _coupon.postValue(response.rechargeCoupon)
+                emit(Event(response))
             } catch (e: Exception) {
                 error.postValue(Event(e.localizedMessage))
                 Timber.d(e)
             }
         }
     }
+
+    val coupon: LiveData<String>
+        get() = _coupon
 
     fun login(creds: Creds) {
         credentials.value = creds

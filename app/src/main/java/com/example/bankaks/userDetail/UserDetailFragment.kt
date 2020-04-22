@@ -15,7 +15,10 @@ import com.example.bankaks.MainViewModel
 import com.example.bankaks.R
 import com.example.bankaks.databinding.FragmentUserDetailBinding
 import com.example.bankaks.model.Recharge
+import com.example.bankaks.util.KeyboardUtil
+import com.example.bankaks.util.showToast
 import com.example.bankaks.util.viewLifecycle
+import com.momentsnap.android.EventObserver
 
 
 /**
@@ -55,6 +58,11 @@ class UserDetailFragment : BaseFragment() {
         })
 
         binding.generate.setOnClickListener {
+
+            KeyboardUtil.hideSoftKeyboard(requireActivity())
+
+            binding.loader.visibility = View.VISIBLE
+
             var amount = ""
             when (binding.chipGroup.checkedChipId) {
                 R.id.chip10 -> amount = "10"
@@ -69,8 +77,14 @@ class UserDetailFragment : BaseFragment() {
 
         }
 
-        viewModel.rechargeCoupon.observe(viewLifecycleOwner, Observer {
+        viewModel.rechargeCoupon.observe(viewLifecycleOwner, EventObserver {
+            binding.loader.visibility = View.GONE
             navController.navigate(UserDetailFragmentDirections.actionUserDetailFragmentToRechargeCouponFragment())
+        })
+
+        viewModel.error.observe(viewLifecycleOwner, EventObserver {
+            binding.loader.visibility = View.GONE
+            showToast(it)
         })
 
     }

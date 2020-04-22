@@ -19,7 +19,7 @@
         android:id="@+id/userDetailFragment"
         android:name="com.example.bankaks.userDetail.UserDetailFragment"
         android:label="fragment_user_detail"
-        tools:layout="@layout/fragment_user_detail" >
+        tools:layout="@layout/fragment_user_detail">
         <action
             android:id="@+id/action_userDetailFragment_to_rechargeCouponFragment"
             app:destination="@id/rechargeCouponFragment" />
@@ -28,5 +28,11 @@
         android:id="@+id/rechargeCouponFragment"
         android:name="com.example.bankaks.rechargeCoupon.RechargeCouponFragment"
         android:label="fragment_recharge_coupon"
-        tools:layout="@layout/fragment_recharge_coupon" />
+        tools:layout="@layout/fragment_recharge_coupon">
+        <action
+            android:id="@+id/action_rechargeCouponFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment"
+            app:popUpTo="@id/rechargeCouponFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

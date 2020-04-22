@@ -43,13 +43,14 @@ class RechargeCouponFragment : BaseFragment() {
         viewModel =
             ViewModelProvider(requireActivity(), viewModelFactory).get(MainViewModel::class.java)
 
-        viewModel.rechargeCoupon.observe(viewLifecycleOwner, Observer {
-            binding.rechargeCoupon.text = it.rechargeCoupon
+        viewModel.coupon.observe(viewLifecycleOwner, Observer {
+            binding.rechargeCoupon.text = it
         })
 
         binding.done.setOnClickListener {
-            navController.popBackStack()
+            navController.navigate(RechargeCouponFragmentDirections.actionRechargeCouponFragmentToUserDetailFragment())
         }
+
     }
 
 }
